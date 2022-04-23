@@ -1,4 +1,29 @@
 .header {
     padding: 20px 0px;
-    background: #fff;
+    background: #343a40;
+    position: sticky;
+    position: -webkit-sticky;
+    top: 0px;
+    left: 0px;
+    z-index: 1;
+    color: #fff;
+
+    .brand {
+        display: inline-block;
+        margin-right: 30px;
+        font-weight: bold;
+        font-size: 18px;
+    }
+    ul {
+        list-style: none;
+        margin: 0px;
+        padding: 0px;
+        li {
+            display: inline-block;
+            margin-right: 10px;
+            a {
+                color: #fff;
+            }
+        }
+    }
 }

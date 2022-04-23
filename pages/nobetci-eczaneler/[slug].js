@@ -3,15 +3,23 @@ import axios from "axios";
 import https from 'https';
 import Pharmacy from "../../Components/Pharmacy";
 import { useRouter } from 'next/router';
+import DistrictList from "../../Components/Districts/DistrictList";
 
 const IlDetay = ({ result }) => {
-    const router = useRouter();
 
-    const [list, setList] = useState(result);
+    const [ilceler, setIlceler] = useState([]);
+    const [eczaneListesi, setEczaneListesi] = useState([]);
+    const [selectedDistrict, setSelectedDistict] = useState();
+
     useEffect(() => {
-        setList(result);
-    }, [router])
+        setIlceler(["Tüm İlçeler", ...new Set(result.data.pharmacyList.map((item) => { return item.ilceAdi }))]);
+        setEczaneListesi(result?.data?.pharmacyList);
+        setSelectedDistict("Tüm İlçeler");
+    }, [result]);
 
+    useEffect(() => {
+        setEczaneListesi((items) => selectedDistrict != "Tüm İlçeler" ? [...result.data.pharmacyList.filter(a => a.ilceAdi == selectedDistrict)] : result?.data?.pharmacyList);
+    }, [selectedDistrict]);
 
     if (result.hasError == true) {
         return (<div className="col-12">
@@ -20,8 +28,14 @@ const IlDetay = ({ result }) => {
     }
     return (
         <>
+            <div className="row col-12">
+                <h3>
+                    {result.data.cityName}
+                </h3>
+            </div>
+            <DistrictList ilceler={ilceler} selectedDistrict={selectedDistrict} setSelectedDistict={setSelectedDistict} />
             <div className="row g-4">
-                {list?.data?.entities?.map(item => <Pharmacy item={item} key={item.guidKey} />)}
+                {eczaneListesi?.map(item => <Pharmacy item={item} key={item.guidKey} />)}
             </div>
         </>
     )
@@ -42,7 +56,10 @@ export const getStaticProps = async (context) => {
         .then(resp => {
             return {
                 hasError: false,
-                data: resp.data
+                data: {
+                    cityName: resp?.data?.entity?.city?.ilAdi,
+                    pharmacyList: resp?.data?.entity?.pharmacies
+                }
             }
         }).catch(err => {
 
