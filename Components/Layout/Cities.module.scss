@@ -1,0 +1,17 @@
+.listCity {
+    display: block;
+    margin: 0px;
+    padding: 0px;
+    list-style: none;
+    li {
+        display: block;
+        margin-bottom: 15px;
+        a {
+            display: block;
+            font-size: 15px;
+            font-weight: 600;
+            color: #000;
+            text-transform: uppercase;
+        }
+    }
+}
