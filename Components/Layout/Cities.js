@@ -20,6 +20,7 @@ const Cities = () => {
         })
     }, []);
 
+
     return (
         <aside className="p-3 shadow">
             <ul className={styles.listCity}>

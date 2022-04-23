@@ -8,10 +8,14 @@
         margin-bottom: 15px;
         a {
             display: block;
-            font-size: 15px;
-            font-weight: 600;
+            font-size: 14px;
+            font-weight: 500;
             color: #000;
+            transition: all 0.4s ease-in;
             text-transform: uppercase;
+            &:hover {
+                color: red;
+            }
         }
     }
 }
