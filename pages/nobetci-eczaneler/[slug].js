@@ -92,7 +92,7 @@ export const getStaticPaths = async () => {
             console.log("Erros Are ", err);
         });
 
-    // console.log("Paths Are ", paths);
+
     return {
         paths,
         fallback: false
