@@ -1,17 +1,18 @@
 import React from 'react';
 import styles from './DistrictList.module.scss';
 
-const DistrictList = ({ ilceler, setSelectedDistict, selectedDistrict }) => {
+const DistrictList = ({ ilceler, customSelectDistrict, selectedDistrict }) => {
     return (
-        <div className="row col-12 mb-3">
-            {ilceler.map((item) => (
-                <div key={item} onClick={(e) => setSelectedDistict(item)} className={`col-sm-6 col-md-6 col-lg-3 col-xl-3 p-1`}>
-                    <div className={selectedDistrict == item ? `${styles.item} ${styles.activeItem}` : `${styles.item}`}>
-                        {item}
-                    </div>
-
-                </div>
-            ))}
+        <div className="row">
+            <div className='col-12'>
+                <ul className={`list-group ${styles.listCustom}`}>
+                    {ilceler.map((item) => (
+                        <li key={item} onClick={(e) => customSelectDistrict(item)} className={selectedDistrict == item ? `list-group-item ${styles.active}` : `list-group-item`}>
+                            {item}
+                        </li>
+                    ))}
+                </ul>
+            </div>
         </div>
     )
 }

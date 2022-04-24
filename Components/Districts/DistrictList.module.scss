@@ -1,17 +1,12 @@
-.item {
-    cursor: pointer;
-    transition: all 0.3s ease-in;
-    box-sizing: border-box;
-    display: inline-flex;
-
-    align-items: center;
-    border-radius: 10px;
-    padding: 10px;
-    font-size: 14px;
-    font-weight: 500;
-    &.activeItem {
-        background: blue;
-
-        color: #fff;
+.listCustom {
+    list-style: none;
+    margin: 0px;
+    padding: 0px;
+    li {
+        cursor: pointer;
+        &.active {
+            background: #343a40;
+            color: #fff;
+        }
     }
 }

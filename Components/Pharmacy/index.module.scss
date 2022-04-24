@@ -1,0 +1,35 @@
+.customCard {
+    .title {
+        font-weight: bold;
+        font-size: 15px;
+        color: #000;
+    }
+    .subInfo {
+        display: flex;
+        justify-content: flex-start;
+        line-height: 30px;
+        margin-bottom: 10px;
+        .mapButton {
+            background: none;
+            padding: 0px;
+            color: #000;
+            border: none;
+            margin-left: 10px;
+            font-size: 14px;
+        }
+
+        .info {
+            display: inline-block;
+            font-size: 14px;
+            font-weight: 400;
+            color: #000;
+            margin-left: 10px;
+            &.phone {
+            }
+            i {
+                font-size: 20px;
+                display: inline-block;
+            }
+        }
+    }
+}

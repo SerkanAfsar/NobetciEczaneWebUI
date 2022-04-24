@@ -11,42 +11,42 @@ const Header = () => {
                 </Link>
                 <ul>
                     <li>
-                        <Link href="/nobetci-eczaneler/istanbul-nobetci-eczaneleri">
+                        <Link href="/istanbul-nobetci-eczaneleri">
                             <a title="İstanbul Nöbetçi Eczaneleri">
                                 İstanbul
                             </a>
                         </Link>
                     </li>
                     <li>
-                        <Link href="/nobetci-eczaneler/ankara-nobetci-eczaneleri">
+                        <Link href="/ankara-nobetci-eczaneleri">
                             <a title="Ankara Nöbetçi Eczaneleri">
                                 Ankara
                             </a>
                         </Link>
                     </li>
                     <li>
-                        <Link href="/nobetci-eczaneler/izmir-nobetci-eczaneleri">
+                        <Link href="/izmir-nobetci-eczaneleri">
                             <a title="İzmir Nöbetçi Eczaneleri">
                                 İzmir
                             </a>
                         </Link>
                     </li>
                     <li>
-                        <Link href="/nobetci-eczaneler/bursa-nobetci-eczaneleri">
+                        <Link href="/bursa-nobetci-eczaneleri">
                             <a title="Bursa Nöbetçi Eczaneleri">
                                 Bursa
                             </a>
                         </Link>
                     </li>
                     <li>
-                        <Link href="/nobetci-eczaneler/antalya-nobetci-eczaneleri">
+                        <Link href="/antalya-nobetci-eczaneleri">
                             <a title="Antalya Nöbetçi Eczaneleri">
                                 Antalya
                             </a>
                         </Link>
                     </li>
                     <li>
-                        <Link href="/nobetci-eczaneler/adana-nobetci-eczaneleri">
+                        <Link href="/adana-nobetci-eczaneleri">
                             <a title="Adana Nöbetçi Eczaneleri">
                                 Adana
                             </a>

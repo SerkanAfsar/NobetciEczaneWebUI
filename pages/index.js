@@ -6,7 +6,7 @@ import axios from 'axios';
 import Link from 'next/link';
 
 export default function Home({ cities }) {
-  console.log(cities);
+
   return (
     <>
       <Head>
@@ -18,7 +18,7 @@ export default function Home({ cities }) {
         {cities?.map((item) => (
           <div className='col-md-6 col-lg-4 col-12'>
             <Link href={{
-              pathname: "/nobetci-eczaneler/[slug]",
+              pathname: "/[slug]",
               query: { slug: item.seoUrl }
             }}>
               <a title={item.cityName} className={`shadow p-4 h-100 ${styles.city}`}>
