@@ -4,7 +4,7 @@ import "primereact/resources/themes/lara-light-indigo/theme.css";  //theme
 import "primereact/resources/primereact.min.css";                  //core css
 import "primeicons/primeicons.css";                                //icons
 import 'nprogress/nprogress.css';
-import '../styles/globals.scss'
+import '../styles/globals.css'
 import Layout from '../Components/Layout'
 import NProgress from 'nprogress';
 import Router from 'next/router';

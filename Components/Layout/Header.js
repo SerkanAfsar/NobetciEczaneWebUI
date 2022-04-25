@@ -11,6 +11,13 @@ const Header = () => {
                 </Link>
                 <ul>
                     <li>
+                        <Link href="/">
+                            <a title="Anasayfa">
+                                Anasayfa
+                            </a>
+                        </Link>
+                    </li>
+                    <li>
                         <Link href="/istanbul-nobetci-eczaneleri">
                             <a title="İstanbul Nöbetçi Eczaneleri">
                                 İstanbul

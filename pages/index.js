@@ -1,11 +1,19 @@
 import Head from 'next/head'
 import styles from './index.module.scss'
-import React, { useEffect } from 'react';
+import React, { useEffect, useState, useRef } from 'react';
 import https from 'https';
 import axios from 'axios';
 import Link from 'next/link';
 
+
 export default function Home({ cities }) {
+
+  const [city, selectedCity] = useState();
+  const [cityList, setCityList] = useState(cities);
+
+  const SearchFunction = (input) => {
+    setCityList(items => cities.filter(a => a.cityName.toLocaleLowerCase().indexOf(input.toLocaleLowerCase()) > -1));
+  }
 
   return (
     <>
@@ -15,8 +23,12 @@ export default function Home({ cities }) {
         <link rel="icon" href="/favicon.ico" />
       </Head>
       <div className='row g-4'>
-        {cities?.map((item) => (
-          <div className='col-md-6 col-lg-4 col-12'>
+        <div className='col-12 mb-2'>
+          <input type="text" placeholder='Aramak İstediğiniz İli Yazınız...' value={city} onChange={(e) => SearchFunction(e.target.value)} className="w-100 p-3 form-control" />
+
+        </div>
+        {cityList?.map((item) => (
+          <div className='col-md-6 col-lg-4 col-12' key={item.cityName}>
             <Link href={{
               pathname: "/[slug]",
               query: { slug: item.seoUrl }
@@ -39,16 +51,20 @@ export const getStaticProps = async () => {
   });
   const cities = await axios.get(`${process.env.NEXT_PUBLIC_API_URL}/Cities/GetCityList`, { httpsAgent: agent })
     .then(resp => {
-      return resp.data.entities?.map(item => {
+
+      const arr = resp.data.entities?.map(item => {
         return {
           seoUrl: item.seoUrl.split("/")[2],
           cityName: item.ilAdi
         }
-      })
+      });
+      return arr;
+
     })
     .catch(err => {
       console.log("Errors Are ", err);
     });
+
 
 
   return {
