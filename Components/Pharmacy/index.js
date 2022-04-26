@@ -12,7 +12,7 @@ const Pharmacy = ({ item }) => {
 
 
     return (<>
-        <div className="col-lg-4 col-md-6 col-12">
+        <div className="col-lg-6 col-xl-4 col-md-6 col-12">
             <div className={`card shadow h-100 ${styles.customCard}`}>
                 <div className={`card-header ${styles.title}`}>
                     {item.eczaneAdi} - {item.ilceAdi}
@@ -30,8 +30,7 @@ const Pharmacy = ({ item }) => {
                     {item.hasMap == true ? (
                         <div className={styles.subInfo}>
                             <i className="bi bi-pin-map-fill"></i>
-                            {/* <Button label="HARİTA İÇİN TIKLAYINIZ" className={styles.mapButton} onClick={() => setDisplayBasic(true)} />
-                            < */}
+
                             <a target="_blank" href={`https://www.google.com/maps?q=${item.latitude},${item.longitude}`} className={styles.mapButton} > Harita İçin Tıklayınız</a>
                         </div>
                     ) : (<></>)
@@ -40,9 +39,7 @@ const Pharmacy = ({ item }) => {
                 </div>
             </div>
         </div>
-        {/* <Dialog header={`${item.eczaneAdi} - ${item.ilceAdi}`} visible={displayBasic} style={{ width: '80vw' }} onHide={() => setDisplayBasic(false)}>
-            <PharmacyMap item={item} />
-        </Dialog> */}
+
 
     </>
     );

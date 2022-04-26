@@ -1,0 +1,27 @@
+.scrollDiv {
+    background: red;
+    width: 50px;
+    height: 50px;
+    justify-content: center;
+    align-items: center;
+    border-radius: 50%;
+    display: flex;
+    text-align: center;
+    transition: all 0.3s ease-in;
+    opacity: 0;
+    visibility: hidden;
+    position: fixed;
+    right: 10px;
+    z-index: 99;
+    bottom: 10px;
+    cursor: pointer;
+    &.active {
+        opacity: 1;
+        visibility: visible;
+    }
+
+    i {
+        color: #fff;
+        font-size: 23px;
+    }
+}

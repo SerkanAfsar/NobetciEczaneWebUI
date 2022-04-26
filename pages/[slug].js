@@ -13,6 +13,7 @@ const IlDetay = ({ result }) => {
     const [selectedDistrict, setSelectedDistict] = useState();
 
     const mainDiv = useRef();
+    const mainDiv2 = useRef();
 
     useEffect(() => {
         setIlceler(["Tüm İlçeler", ...new Set(result.data.pharmacyList.map((item) => { return item.ilceAdi }))]);
@@ -25,7 +26,19 @@ const IlDetay = ({ result }) => {
     }, [selectedDistrict]);
 
     const customSelectDistrict = (distict) => {
-        window.scrollTo({ top: mainDiv.current, behavior: "smooth" })
+
+        if (window.innerWidth > 1023) {
+
+            window.scrollTo({
+                top: mainDiv.current, behavior: "smooth"
+            })
+        }
+        else {
+            window.scrollTo({
+                top: mainDiv2.current.clientHeight + 40, behavior: "smooth"
+            })
+        }
+
         setSelectedDistict(distict);
     }
 
@@ -36,11 +49,11 @@ const IlDetay = ({ result }) => {
     }
     return (
         <>
-            <div className="row">
+            <div className="row d-flex  flex-column-reverse flex-lg-row  bd-highlight">
                 <div className="col-lg-10 col-12" ref={mainDiv}>
                     <PharmacyList eczaneListesi={eczaneListesi} />
                 </div>
-                <div className="col-lg-2 col-12">
+                <div className="col-lg-2 col-12" ref={mainDiv2}>
                     <DistrictList ilceler={ilceler} selectedDistrict={selectedDistrict} customSelectDistrict={customSelectDistrict} />
                 </div>
             </div>

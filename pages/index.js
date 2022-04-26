@@ -28,12 +28,12 @@ export default function Home({ cities }) {
 
         </div>
         {cityList?.map((item) => (
-          <div className='col-md-6 col-lg-4 col-12' key={item.cityName}>
+          <div className='col-md-6 col-lg-4 col-12 ' key={item.cityName}>
             <Link href={{
               pathname: "/[slug]",
               query: { slug: item.seoUrl }
             }}>
-              <a title={item.cityName} className={`shadow p-4 h-100 ${styles.city}`}>
+              <a title={item.cityName} className={`shadow border rounded p-4 h-100 ${styles.city}`}>
                 {item.cityName}
               </a>
             </Link>
