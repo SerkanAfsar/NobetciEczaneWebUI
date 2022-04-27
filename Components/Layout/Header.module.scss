@@ -7,23 +7,67 @@
     left: 0px;
     z-index: 3;
     color: #fff;
+    nav {
+        display: flex;
+        justify-content: flex-start;
+        align-items: center;
+        .brand {
+            font-size: 20px;
+            font-weight: 600;
+        }
 
-    .brand {
-        display: inline-block;
-        margin-right: 30px;
-        font-weight: bold;
-        font-size: 18px;
-    }
-    ul {
-        list-style: none;
-        margin: 0px;
-        padding: 0px;
-        li {
-            display: inline-block;
-            margin-right: 20px;
-            a {
-                color: #fff;
+        .ulClass {
+            list-style: none;
+            padding: 0px;
+            margin: 0px 0px 0px 20px;
+            li {
+                display: inline-block;
+                margin-right: 20px;
             }
+        }
+
+        @media all and (max-width: 1023px) {
+            display: block;
+            .brand {
+                display: block;
+                width: 100%;
+            }
+
+            .ulClass {
+                display: none;
+                margin: 20px 0px;
+
+                width: 100%;
+                li {
+                    display: block;
+                    width: 100%;
+                    margin: 10px 0px;
+                    a {
+                        display: block;
+                        width: 100%;
+                    }
+                }
+                &.active {
+                    display: block;
+                }
+            }
+        }
+    }
+    .btn {
+        display: none;
+        border: none;
+        position: absolute;
+        right: 5px;
+        top: -5px;
+        background: none;
+        cursor: pointer;
+
+        i {
+            color: #fff;
+            font-size: 25px;
+        }
+        @media all and (max-width: 1023px) {
+            display: block;
         }
     }
 }
