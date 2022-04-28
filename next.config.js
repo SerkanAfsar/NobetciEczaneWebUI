@@ -7,7 +7,10 @@ const nextConfig = {
   i18n: {
     locales: ['tr-TR'],
     defaultLocale: 'tr-TR'
-  }
+  },
+  domains: [
+    'http://localhost:3000'
+  ]
 
 }
 

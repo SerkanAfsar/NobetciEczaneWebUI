@@ -5,6 +5,7 @@ import Pharmacy from "../Components/Pharmacy";
 import { useRouter } from 'next/router';
 import DistrictList from "../Components/Districts/DistrictList";
 import PharmacyList from "../Components/Pharmacy/PharmacyList";
+import SeoHead from "../Components/Commons/SeoHead";
 
 const IlDetay = ({ result }) => {
 
@@ -52,6 +53,9 @@ const IlDetay = ({ result }) => {
     };
     return (
         <>
+            <SeoHead title={`${result.data.cityName}`}
+                description={`${result.data.cityName}`}
+            />
             <div className="row d-flex  flex-column-reverse flex-lg-row  bd-highlight">
                 <div className="col-lg-10 col-12" ref={mainDiv}>
                     <PharmacyList eczaneListesi={eczaneListesi} />
