@@ -45,7 +45,7 @@ const IlDetay = ({ result }) => {
 
     if (result.hasError) {
         return (
-            <div>{cities.data.map(item => (<div>
+            <div>{cities.data.map(item => (<div key={item}>
                 {item}
             </div>))}</div>
 

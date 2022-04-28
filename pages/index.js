@@ -18,7 +18,7 @@ export default function Home({ cities }) {
   }
   if (cities.hasError) {
     return (
-      <div>{cities.data.map(item => (<div>
+      <div>{cities.data.map(item => (<div key={item}>
         {item}
       </div>))}</div>
 
