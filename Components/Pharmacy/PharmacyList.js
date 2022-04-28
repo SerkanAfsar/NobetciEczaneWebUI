@@ -5,7 +5,7 @@ import styles from './PharmacyList.module.scss';
 const PharmacyList = ({ eczaneListesi }) => {
     return (
         <div className={`row g-4 mb-md-4 ${styles.mb20}`}>
-            {eczaneListesi?.map(item => <Pharmacy item={item} key={item.guidKey} />)}
+            {eczaneListesi?.map((item, index) => <Pharmacy item={item} key={index} />)}
         </div>
     );
 }

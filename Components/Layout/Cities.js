@@ -24,8 +24,8 @@ const Cities = () => {
     return (
         <aside className="p-3 shadow">
             <ul className={styles.listCity}>
-                {cityList.map((item) => (
-                    <li key={item.ilId}>
+                {cityList.map((item, index) => (
+                    <li key={index}>
                         <Link
                             href={{
                                 pathname: "/nobetci-eczaneler/[slug]",
