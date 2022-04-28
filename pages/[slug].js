@@ -42,11 +42,14 @@ const IlDetay = ({ result }) => {
         setSelectedDistict(distict);
     }
 
-    if (result.hasError == true) {
-        return (<div className="col-12">
-            <h1>Error Accoured</h1>
-        </div>)
-    }
+    if (result.hasError) {
+        return (
+            <div>{cities.data.map(item => (<div>
+                {item}
+            </div>))}</div>
+
+        )
+    };
     return (
         <>
             <div className="row d-flex  flex-column-reverse flex-lg-row  bd-highlight">
@@ -87,7 +90,7 @@ export const getStaticProps = async (context) => {
 
             return {
                 hasError: true,
-                data: err
+                data: err.response != null ? err.response.data.errorList : new Array(err.message)
             }
         });
 
@@ -111,7 +114,7 @@ export const getStaticPaths = async () => {
             })
         })
         .catch(err => {
-            console.log("Erros Are ", err);
+            return [];
         });
 
 

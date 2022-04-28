@@ -9,11 +9,24 @@ import Link from 'next/link';
 export default function Home({ cities }) {
 
   const [city, selectedCity] = useState();
-  const [cityList, setCityList] = useState(cities);
+  const [cityList, setCityList] = useState(cities.data || []);
+
+
+
+
+
 
   const SearchFunction = (input) => {
-    setCityList(items => cities.filter(a => a.cityName.toLocaleLowerCase().indexOf(input.toLocaleLowerCase()) > -1));
+    setCityList(items => cities?.data?.filter(a => a.cityName.toLocaleLowerCase().indexOf(input.toLocaleLowerCase()) > -1));
   }
+  if (cities.hasError) {
+    return (
+      <div>{cities.data.map(item => (<div>
+        {item}
+      </div>))}</div>
+
+    )
+  };
 
   return (
     <>
@@ -51,18 +64,24 @@ export const getStaticProps = async () => {
   });
   const cities = await axios.get(`${process.env.NEXT_PUBLIC_API_URL}/Cities/GetCityList`, { httpsAgent: agent })
     .then(resp => {
-
       const arr = resp.data.entities?.map(item => {
         return {
           seoUrl: item.seoUrl.split("/")[2],
           cityName: item.ilAdi
         }
       });
-      return arr;
+      return {
+        hasError: false,
+        data: arr
+      };
 
     })
     .catch(err => {
-      console.log("Errors Are ", err);
+
+      return {
+        hasError: true,
+        data: err.response != null ? err.response.data.errorList : new Array(err.message)
+      }
     });
 
 
