@@ -101,8 +101,8 @@ export const getStaticProps = async (context) => {
     return {
         props: {
             result,
-            revalidate: 1
-        }
+        },
+        revalidate: 1
     }
 }
 export const getStaticPaths = async () => {
