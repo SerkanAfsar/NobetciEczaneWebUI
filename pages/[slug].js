@@ -71,7 +71,7 @@ const IlDetay = ({ result }) => {
 }
 export default IlDetay;
 
-cons data => {
+export const getStaticProps = async (context) => {
     const agent = new https.Agent({
         rejectUnauthorized: false
     });
