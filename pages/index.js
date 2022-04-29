@@ -1,6 +1,5 @@
-import Head from 'next/head'
 import styles from './index.module.scss'
-import React, { useEffect, useState, useRef } from 'react';
+import React, { useState } from 'react';
 import https from 'https';
 import axios from 'axios';
 import Link from 'next/link';
