@@ -28,10 +28,15 @@ export default function Home({ cities }) {
     <>
       <SeoHead title="Türkiye İl & İlçe Nöbetçi Eczane Listesi | Nöbetçi Eczaneler"
         description="Türkiye İl & İlçe Nöbetçi Eczane Listesi | Nöbetçi Eczaneler" />
+      <h1 className={styles.seoTag}>Türkiye İl & İlçe Nöbetçi Eczane Listesi</h1>
+      <h2 className={styles.seoTag}>Nöbetçi Eczaneler</h2>
+      <h3 className={styles.seoTag}>İstanbul Nöbetçi Eczaneleri | İstanbul Nöbetçi Eczane</h3>
+      <h4 className={styles.seoTag}>Ankara Nöbetçi Eczaneleri | Ankara Nöbetçi Eczane</h4>
+      <h5 className={styles.seoTag}>İzmir Nöbetçi Eczaneleri | İzmir Nöbetçi Eczane</h5>
+      <h6 className={styles.seoTag}>Nöbetçi Eczane</h6>
       <div className='row g-4'>
         <div className='col-12 mb-2'>
           <input type="text" placeholder='Aramak İstediğiniz İli Yazınız...' value={city} onChange={(e) => SearchFunction(e.target.value)} className="w-100 p-3 form-control" />
-
         </div>
         {cityList?.map((item) => (
           <div className='col-md-6 col-lg-4 col-12 ' key={item.cityName}>

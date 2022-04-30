@@ -2,7 +2,6 @@ import React, { useState, useEffect, useRef } from "react";
 import axios from "axios";
 import https from 'https';
 import Pharmacy from "../Components/Pharmacy";
-import { useRouter } from 'next/router';
 import DistrictList from "../Components/Districts/DistrictList";
 import PharmacyList from "../Components/Pharmacy/PharmacyList";
 import SeoHead from "../Components/Commons/SeoHead";
@@ -53,9 +52,15 @@ const IlDetay = ({ result }) => {
     };
     return (
         <>
-            <SeoHead title={`${result.data.cityName}`}
-                description={`${result.data.cityName}`}
+            <SeoHead title={`${result.data.cityName} | ${result.data.cityName.split(' ')[0]} Nöbetçi Eczane`}
+                description={`${result.data.cityName} | ${result.data.cityName.split(' ')[0]} Nöbetçi Eczane`}
             />
+            <h1 style={{ display: "none" }}>{result.data.cityName}</h1>
+            <h2 style={{ display: "none" }}>{`${result.data.cityName.split(" ")[0]} Nöbetçi Eczane`}</h2>
+            <h3 style={{ display: "none" }}>{`${result.data.cityName.split(" ")[0]} Nöbetçi Eczane Listesi`}</h3>
+            <h4 style={{ display: "none" }}>{`${result.data.cityName.split(" ")[0]} Eczaneleri`}</h4>
+            <h5 style={{ display: "none" }}>{`${result.data.cityName.split(" ")[0]} Nöbetçi Eczaneler`}</h5>
+            <h6 style={{ display: "none" }}>Nöbetçi Eczane</h6>
             <div className="row d-flex  flex-column-reverse flex-lg-row  bd-highlight">
                 <div className="col-lg-10 col-12" ref={mainDiv}>
                     <PharmacyList eczaneListesi={eczaneListesi} />
@@ -75,9 +80,7 @@ export const getStaticProps = async (context) => {
     const agent = new https.Agent({
         rejectUnauthorized: false
     });
-
     const { slug } = context.params;
-
     const result = await axios.post(`${process.env.NEXT_PUBLIC_API_URL}/Pharmacies/PharmacyListBySlug`,
         {
             slugUrl: `/nobetci-eczaneler/${slug}`
@@ -100,7 +103,7 @@ export const getStaticProps = async (context) => {
 
     return {
         props: {
-            result,
+            result
         },
         revalidate: 1
     }
