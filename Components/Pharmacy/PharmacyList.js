@@ -6,7 +6,7 @@ const PharmacyList = ({ eczaneListesi, selectedDistrict }) => {
     const [list, setList] = useState(eczaneListesi);
     useEffect(() => {
         setList((items) => selectedDistrict != "Tüm İlçeler" ? [...eczaneListesi.filter(a => a.ilceAdi == selectedDistrict)] : eczaneListesi);
-    }, [selectedDistrict]);
+    }, [selectedDistrict, eczaneListesi]);
     return (
         <div className={`row g-4 mb-md-4 ${styles.mb20}`}>
             {
