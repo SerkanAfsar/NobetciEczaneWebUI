@@ -45,7 +45,7 @@ const IlDetay = ({ result }) => {
 
     if (result.hasError) {
         return (
-            <div>{result.data.map(item => (<div>
+            <div>{result.data.map((item, index) => (<div key={index}>
                 {item}
             </div>))}</div>
 
