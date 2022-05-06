@@ -45,7 +45,7 @@ const IlDetay = ({ result }) => {
 
     if (result.hasError) {
         return (
-            <div>{cities.data.map(item => (<div>
+            <div>{result.data.map(item => (<div>
                 {item}
             </div>))}</div>
 
@@ -56,7 +56,7 @@ const IlDetay = ({ result }) => {
             <SeoHead title={`${result.data.cityName}`}
                 description={`${result.data.cityName}`}
             />
-            <div className="row d-flex  flex-column-reverse flex-lg-row  bd-highlight">
+            <div className="row d-flex flex-column-reverse flex-lg-row  bd-highlight">
                 <div className="col-lg-10 col-12" ref={mainDiv}>
                     <PharmacyList eczaneListesi={eczaneListesi} />
                 </div>
