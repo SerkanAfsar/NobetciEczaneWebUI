@@ -54,6 +54,12 @@ const IlDetay = ({ result }) => {
             <SeoHead title={`${result.data.cityName}`}
                 description={`${result.data.cityName}`}
             />
+            <h1 style={{ display: "none" }}>{result.data.cityName}</h1>
+            <h2 style={{ display: "none" }}>{`${result.data.cityName.split(" ")[0]} Nöbetçi Eczane`}</h2>
+            <h3 style={{ display: "none" }}>{`${result.data.cityName.split(" ")[0]} Nöbetçi Eczane Listesi`}</h3>
+            <h4 style={{ display: "none" }}>{`${result.data.cityName.split(" ")[0]} Eczaneleri`}</h4>
+            <h5 style={{ display: "none" }}>{`${result.data.cityName.split(" ")[0]} Nöbetçi Eczaneler`}</h5>
+            <h6 style={{ display: "none" }}>Nöbetçi Eczane</h6>
             <div className="row d-flex flex-column-reverse flex-lg-row  bd-highlight">
                 <div className="col-lg-10 col-12" ref={mainDiv}>
                     <PharmacyList eczaneListesi={result?.data?.pharmacyList} selectedDistrict={selectedDistrict} />
