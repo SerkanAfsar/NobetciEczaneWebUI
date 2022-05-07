@@ -8,8 +8,6 @@ import { Dialog } from 'primereact/dialog';
 
 
 const Pharmacy = ({ item }) => {
-    const [displayBasic, setDisplayBasic] = useState(false);
-
 
     return (<>
         <div className="col-lg-6 col-xl-4 col-md-6 col-12">
@@ -24,7 +22,7 @@ const Pharmacy = ({ item }) => {
                     </div>
                     <div className={styles.subInfo}>
                         <i className="bi bi-telephone-fill"></i>
-                        <a href={`tel:${item.telefon}`} className={`card-text ${styles.info} ${styles.phone}`}>{item.telefon} - <b>ARA</b> </a>
+                        <a href={`tel:${item.telefon}`} className={`card-text ${styles.info}`}>{item.telefon}&nbsp;-&nbsp;<b>ARA</b> </a>
                     </div>
 
                     {item.hasMap == true ? (
