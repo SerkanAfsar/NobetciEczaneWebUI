@@ -37,13 +37,8 @@ const Pharmacy = ({ item }) => {
                 </div>
             </div>
         </div>
-
-
     </>
     );
 }
-
-
-
 
 export default Pharmacy;
