@@ -1,7 +1,5 @@
 import styles from './index.module.scss'
 import React, { useState } from 'react';
-import https from 'https';
-import axios from 'axios';
 import Link from 'next/link';
 import SeoHead from '../Components/Commons/SeoHead';
 import { getCityList } from '../Response/cities';
@@ -17,7 +15,6 @@ export default function Home({ result }) {
   }
   if (result?.hasError) {
     return (
-
       <div class="alert alert-danger" role="alert">
         <ul>
           {result.errorList.map(item => (<li key={item}>
@@ -25,7 +22,6 @@ export default function Home({ result }) {
           </li>))}
         </ul>
       </div>
-
     )
   };
 

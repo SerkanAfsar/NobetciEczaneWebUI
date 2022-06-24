@@ -1,28 +1,23 @@
 import React, { useState, useEffect, useRef } from "react";
-import axios from "axios";
-import https from 'https';
-import { useRouter } from 'next/router';
 import DistrictList from "../Components/Districts/DistrictList";
 import PharmacyList from "../Components/Pharmacy/PharmacyList";
 import SeoHead from "../Components/Commons/SeoHead";
+import { getPharmacyList } from "../Response/pharmacies";
+import { getCityList } from "../Response/cities";
 
 const IlDetay = ({ result }) => {
 
     const [ilceler, setIlceler] = useState([]);
-    // const [eczaneListesi, setEczaneListesi] = useState([]);
     const [selectedDistrict, setSelectedDistict] = useState();
     const mainDiv = useRef();
     const mainDiv2 = useRef();
 
     useEffect(() => {
-        setIlceler(["Tüm İlçeler", ...new Set(result.data.pharmacyList.map((item) => { return item.ilceAdi }))]);
-        // setEczaneListesi(result?.data?.pharmacyList);
+        setIlceler(["Tüm İlçeler", ...new Set(result?.data?.pharmacyList.map((item) => { return item.ilceAdi }))]);
         setSelectedDistict("Tüm İlçeler");
     }, [result]);
 
-    // useEffect(() => {
-    //     setEczaneListesi((items) => selectedDistrict != "Tüm İlçeler" ? [...result.data.pharmacyList.filter(a => a.ilceAdi == selectedDistrict)] : result?.data?.pharmacyList);
-    // }, [selectedDistrict]);
+
 
     const customSelectDistrict = (distict) => {
 
@@ -41,24 +36,27 @@ const IlDetay = ({ result }) => {
         setSelectedDistict(distict);
     }
 
-    if (result.hasError) {
+    if (result?.hasError) {
         return (
-            <div>{result.data.map((item, index) => (<div key={index}>
-                {item}
-            </div>))}</div>
-
+            <div class="alert alert-danger" role="alert">
+                <ul>
+                    {result?.errorList.map(item => (<li key={item}>
+                        {item}
+                    </li>))}
+                </ul>
+            </div>
         )
     };
     return (
         <>
-            <SeoHead title={`${result.data.cityName}`}
-                description={`${result.data.cityName}`}
+            <SeoHead title={`${result?.data?.cityName}`}
+                description={`${result?.data?.cityName}`}
             />
-            <h1 style={{ display: "none" }}>{result.data.cityName}</h1>
-            <h2 style={{ display: "none" }}>{`${result.data.cityName.split(" ")[0]} Nöbetçi Eczane`}</h2>
-            <h3 style={{ display: "none" }}>{`${result.data.cityName.split(" ")[0]} Nöbetçi Eczane Listesi`}</h3>
-            <h4 style={{ display: "none" }}>{`${result.data.cityName.split(" ")[0]} Eczaneleri`}</h4>
-            <h5 style={{ display: "none" }}>{`${result.data.cityName.split(" ")[0]} Nöbetçi Eczaneler`}</h5>
+            <h1 style={{ display: "none" }}>{result?.data?.cityName}</h1>
+            <h2 style={{ display: "none" }}>{`${result?.data?.cityName.split(" ")[0]} Nöbetçi Eczane`}</h2>
+            <h3 style={{ display: "none" }}>{`${result?.data?.cityName.split(" ")[0]} Nöbetçi Eczane Listesi`}</h3>
+            <h4 style={{ display: "none" }}>{`${result?.data?.cityName.split(" ")[0]} Eczaneleri`}</h4>
+            <h5 style={{ display: "none" }}>{`${result?.data?.cityName.split(" ")[0]} Nöbetçi Eczaneler`}</h5>
             <h6 style={{ display: "none" }}>Nöbetçi Eczane</h6>
             <div className="row d-flex flex-column-reverse flex-lg-row  bd-highlight">
                 <div className="col-lg-10 col-12" ref={mainDiv}>
@@ -68,38 +66,15 @@ const IlDetay = ({ result }) => {
                     <DistrictList ilceler={ilceler} selectedDistrict={selectedDistrict} customSelectDistrict={customSelectDistrict} />
                 </div>
             </div>
-
-
         </>
     )
 }
 export default IlDetay;
 
 export const getStaticProps = async (context) => {
-    const agent = new https.Agent({
-        rejectUnauthorized: false
-    });
 
     const { slug } = context.params;
-
-    const result = await axios.post(`${process.env.NEXT_PUBLIC_API_URL}/Pharmacies/PharmacyListBySlug`,
-        {
-            slugUrl: `/nobetci-eczaneler/${slug}`
-        }, { httpsAgent: agent })
-        .then(resp => {
-            return {
-                hasError: false,
-                data: {
-                    cityName: resp?.data?.entity?.city?.ilAdi,
-                    pharmacyList: resp?.data?.entity?.pharmacies
-                }
-            }
-        }).catch(err => {
-            return {
-                hasError: true,
-                data: err.response != null ? err.response.data.errorList : new Array(err.message)
-            }
-        });
+    const result = await getPharmacyList(slug);
 
     return {
         props: {
@@ -110,20 +85,28 @@ export const getStaticProps = async (context) => {
 }
 export const getStaticPaths = async () => {
 
-    const agent = new https.Agent({
-        rejectUnauthorized: false
-    });
-    const paths = await axios.get(`${process.env.NEXT_PUBLIC_API_URL}/Cities/GetCityList`, { httpsAgent: agent })
-        .then(resp => {
-            return resp.data.entities?.map(item => {
-                return {
-                    params: { slug: item.seoUrl.split("/")[2] }
-                }
-            })
-        })
-        .catch(err => {
-            return [];
-        });
+    // const agent = new https.Agent({
+    //     rejectUnauthorized: false
+    // });
+    // const paths = await axiosInstance.get(`${process.env.NEXT_PUBLIC_API_URL}/Cities/GetCityList`)
+    //     .then(resp => {
+    //         return resp.data.entities?.map(item => {
+    //             return {
+    //                 params: { slug: item.seoUrl.split("/")[2] }
+    //             }
+    //         })
+    //     })
+    //     .catch(err => {
+    //         return [];
+    //     });
+
+    const result = await getCityList();
+
+    const paths = (result?.data) && result.data.map(item => {
+        return {
+            params: { slug: item.seoUrl }
+        }
+    }) || [];
 
 
     return {

@@ -2,7 +2,6 @@ import { axiosInstance } from "../Helper";
 
 export const getCityList = async () => {
     return await axiosInstance.get("/Cities/GetCityList").then((resp) => {
-
         const arr = resp.data.entities?.map(item => {
             return {
                 seoUrl: item.seoUrl.split("/")[2],
