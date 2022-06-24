@@ -4,22 +4,27 @@ import https from 'https';
 import axios from 'axios';
 import Link from 'next/link';
 import SeoHead from '../Components/Commons/SeoHead';
+import { getCityList } from '../Response/cities';
 
 
-export default function Home({ cities }) {
+export default function Home({ result }) {
 
   const [city, selectedCity] = useState();
-  const [cityList, setCityList] = useState(cities.data || []);
-
+  const [cityList, setCityList] = useState(result?.data || []);
 
   const SearchFunction = (input) => {
     setCityList(items => cities?.data?.filter(a => a.cityName.toLocaleLowerCase().indexOf(input.toLocaleLowerCase()) > -1));
   }
-  if (cities.hasError) {
+  if (result?.hasError) {
     return (
-      <div>{cities.data.map(item => (<div key={item}>
-        {item}
-      </div>))}</div>
+
+      <div class="alert alert-danger" role="alert">
+        <ul>
+          {result.errorList.map(item => (<li key={item}>
+            {item}
+          </li>))}
+        </ul>
+      </div>
 
     )
   };
@@ -57,36 +62,12 @@ export default function Home({ cities }) {
 }
 
 export const getStaticProps = async () => {
-  const agent = new https.Agent({
-    rejectUnauthorized: false
-  });
-  const cities = await axios.get(`${process.env.NEXT_PUBLIC_API_URL}/Cities/GetCityList`, { httpsAgent: agent })
-    .then(resp => {
-      const arr = resp.data.entities?.map(item => {
-        return {
-          seoUrl: item.seoUrl.split("/")[2],
-          cityName: item.ilAdi
-        }
-      });
-      return {
-        hasError: false,
-        data: arr
-      };
 
-    })
-    .catch(err => {
-
-      return {
-        hasError: true,
-        data: err.response != null ? err.response.data.errorList : new Array(err.message)
-      }
-    });
-
-
+  const result = await getCityList();
 
   return {
     props: {
-      cities: cities
+      result
     }
   }
 }

@@ -1,0 +1,24 @@
+{
+  "name": "nobetci-eczane-app",
+  "version": "0.1.0",
+  "private": true,
+  "scripts": {
+    "dev": "next dev",
+    "build": "next build",
+    "start": "next start",
+    "lint": "next lint"
+  },
+  "dependencies": {
+    "npm": "^0.26.1",
+    "jsdom": "^19.0.0",
+    "next": "12.1.4",
+    "react": "18.0.0",
+    "react-dom": "18.0.0",
+    "request": "^2.88.2",
+    "selenium-pages": "^2.0.2"
+  },
+  "devDependencies": {
+    "eslint": "8.13.0",
+    "eslint-config-next": "12.1.4"
+  }
+}
