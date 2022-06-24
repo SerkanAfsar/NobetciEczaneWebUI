@@ -85,21 +85,6 @@ export const getStaticProps = async (context) => {
 }
 export const getStaticPaths = async () => {
 
-    // const agent = new https.Agent({
-    //     rejectUnauthorized: false
-    // });
-    // const paths = await axiosInstance.get(`${process.env.NEXT_PUBLIC_API_URL}/Cities/GetCityList`)
-    //     .then(resp => {
-    //         return resp.data.entities?.map(item => {
-    //             return {
-    //                 params: { slug: item.seoUrl.split("/")[2] }
-    //             }
-    //         })
-    //     })
-    //     .catch(err => {
-    //         return [];
-    //     });
-
     const result = await getCityList();
 
     const paths = (result?.data) && result.data.map(item => {
