@@ -29,7 +29,7 @@ const Pharmacy = ({ item }) => {
                         <div className={styles.subInfo}>
                             <i className="bi bi-pin-map-fill"></i>
 
-                            <a target="_blank" href={`https://www.google.com/maps?q=${item.latitude},${item.longitude}`} className={styles.mapButton} > Harita İçin Tıklayınız</a>
+                            <a target="_blank" rel="noreferrer" href={`https://www.google.com/maps?q=${item.latitude},${item.longitude}`} className={styles.mapButton} > Harita İçin Tıklayınız</a>
                         </div>
                     ) : (<></>)
                     }

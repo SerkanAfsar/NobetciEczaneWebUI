@@ -38,7 +38,7 @@ const IlDetay = ({ result }) => {
 
     if (result?.hasError) {
         return (
-            <div class="alert alert-danger" role="alert">
+            <div className="alert alert-danger" role="alert">
                 <ul>
                     {result?.errorList.map(item => (<li key={item}>
                         {item}
