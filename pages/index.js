@@ -10,8 +10,9 @@ export default function Home({ result }) {
   const [city, selectedCity] = useState();
   const [cityList, setCityList] = useState(result?.data || []);
 
+
   const SearchFunction = (input) => {
-    setCityList(items => cities?.data?.filter(a => a.cityName.toLocaleLowerCase().indexOf(input.toLocaleLowerCase()) > -1));
+    setCityList(items => input ? cityList?.filter(a => a.cityName.toLocaleLowerCase().indexOf(input.toLocaleLowerCase()) > -1) : result?.data);
   }
   if (result?.hasError) {
     return (
@@ -60,6 +61,8 @@ export default function Home({ result }) {
 export const getStaticProps = async () => {
 
   const result = await getCityList();
+
+
 
   return {
     props: {
