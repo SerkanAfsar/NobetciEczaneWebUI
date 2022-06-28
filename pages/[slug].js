@@ -13,7 +13,7 @@ const Article = () => {
     const { slug } = router.query;
     const fetcher = async () => await getPharmacyList(slug);
 
-    const { data: result } = useSWR('/api/article', fetcher);
+    const { data: result } = useSWR('/api/article', fetcher, { refreshInterval: 1 });
 
     const [ilceler, setIlceler] = useState([]);
     const [selectedDistrict, setSelectedDistict] = useState();
