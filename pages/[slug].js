@@ -12,20 +12,23 @@ const Article = () => {
     const router = useRouter();
     const { slug } = router.query;
     const fetcher = async () => await getPharmacyList(slug);
-
     const { data: result } = useSWR('/api/article', fetcher, { refreshInterval: 1, refreshWhenHidden: true, refreshWhenOffline: true });
-
     const [ilceler, setIlceler] = useState([]);
-    const [selectedDistrict, setSelectedDistict] = useState();
-    const mainDiv = useRef();
-    const mainDiv2 = useRef();
+    const [selectedDistrict, setSelectedDistict] = useState("Tüm İlçeler");
 
     useEffect(() => {
         setIlceler(["Tüm İlçeler", ...new Set(result.data.pharmacyList.map((item) => { return item.ilceAdi }))]);
-        setSelectedDistict("Tüm İlçeler");
-
+        if (!ilceler.includes(selectedDistrict)) {
+            setSelectedDistict("Tüm İlçeler");
+        }
     }, [result]);
 
+    useEffect(() => {
+        setSelectedDistict("Tüm İlçeler");
+    }, [slug])
+
+    const mainDiv = useRef();
+    const mainDiv2 = useRef();
 
     const customSelectDistrict = (distict) => {
 
