@@ -12,7 +12,7 @@ const Article = () => {
     const router = useRouter();
     const { slug } = router.query;
     const fetcher = async () => await getPharmacyList(slug);
-    const { data: result } = useSWR('/api/article', fetcher, { refreshInterval: 1, refreshWhenHidden: true, refreshWhenOffline: true });
+    const { data: result } = useSWR('/api/article', fetcher, { refreshInterval: 1, refreshWhenHidden: true, refreshWhenOffline: true, revalidateIfStale: true });
     const [ilceler, setIlceler] = useState([]);
     const [selectedDistrict, setSelectedDistict] = useState("Tüm İlçeler");
 
@@ -31,7 +31,6 @@ const Article = () => {
     const mainDiv2 = useRef();
 
     const customSelectDistrict = (distict) => {
-
         if (window.innerWidth > 1023) {
             window.scrollTo({
                 top: mainDiv.current, behavior: "smooth"
@@ -69,7 +68,6 @@ const Article = () => {
 }
 
 const IlDetay = ({ fallback }) => {
-
     return (
         <SWRConfig value={{ fallback }}>
             <Article />
