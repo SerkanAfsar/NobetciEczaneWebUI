@@ -4,8 +4,16 @@ import PharmacyList from "../Components/Pharmacy/PharmacyList";
 import SeoHead from "../Components/Commons/SeoHead";
 import { getPharmacyList } from "../Response/pharmacies";
 import { getCityList } from "../Response/cities";
+import useSWR, { SWRConfig } from "swr";
+import { useRouter } from "next/router";
 
-const IlDetay = ({ result }) => {
+
+const Article = () => {
+    const router = useRouter();
+    const { slug } = router.query;
+    const fetcher = async () => await getPharmacyList(slug);
+
+    const { data: result } = useSWR('/api/article', fetcher);
 
     const [ilceler, setIlceler] = useState([]);
     const [selectedDistrict, setSelectedDistict] = useState();
@@ -13,40 +21,26 @@ const IlDetay = ({ result }) => {
     const mainDiv2 = useRef();
 
     useEffect(() => {
-        setIlceler(["Tüm İlçeler", ...new Set(result?.data?.pharmacyList.map((item) => { return item.ilceAdi }))]);
+        setIlceler(["Tüm İlçeler", ...new Set(result.data.pharmacyList.map((item) => { return item.ilceAdi }))]);
         setSelectedDistict("Tüm İlçeler");
-    }, [result]);
 
+    }, [result]);
 
 
     const customSelectDistrict = (distict) => {
 
         if (window.innerWidth > 1023) {
-
             window.scrollTo({
                 top: mainDiv.current, behavior: "smooth"
-            })
+            });
         }
         else {
             window.scrollTo({
                 top: mainDiv2.current.clientHeight + 40, behavior: "smooth"
-            })
+            });
         }
-
         setSelectedDistict(distict);
     }
-
-    if (result?.hasError) {
-        return (
-            <div className="alert alert-danger" role="alert">
-                <ul>
-                    {result?.errorList.map(item => (<li key={item}>
-                        {item}
-                    </li>))}
-                </ul>
-            </div>
-        )
-    };
     return (
         <>
             <SeoHead title={`${result?.data?.cityName}`}
@@ -67,18 +61,29 @@ const IlDetay = ({ result }) => {
                 </div>
             </div>
         </>
-    )
+    );
+
+}
+
+const IlDetay = ({ fallback }) => {
+
+    return (
+        <SWRConfig value={{ fallback }}>
+            <Article />
+        </SWRConfig>
+    );
 }
 export default IlDetay;
 
 export const getStaticProps = async (context) => {
 
     const { slug } = context.params;
-    const result = await getPharmacyList(slug);
-
+    const response = await getPharmacyList(slug);
     return {
         props: {
-            result
+            fallback: {
+                '/api/article': response
+            }
         },
         revalidate: 1
     }
@@ -86,7 +91,6 @@ export const getStaticProps = async (context) => {
 export const getStaticPaths = async () => {
 
     const result = await getCityList();
-
     const paths = (result?.data) && result.data.map(item => {
         return {
             params: { slug: item.seoUrl }
